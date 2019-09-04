@@ -13,18 +13,18 @@ module Secured
   end
 
   def encode_token(payload)
-    JWT.encode(payload, 'my_s3cr3t')
+    JWT.encode(payload, Rails.application.credentials.jwt[:secret])
   end
 
   def auth_header
     request.headers['Authorization']
   end
 
-  def decoded_token(token)
+  def decoded_token
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, 'my_s3cr3t', true, algorithm: 'HS256')
+        JWT.decode(token, Rails.application.credentials.jwt[:secret], true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end
@@ -43,7 +43,7 @@ module Secured
   end
 
   def authorized
-    return true if params[:query].include?('createUser') || params[:query].include?('create_user')
+    return true if params[:query].include?('CreateUser') || params[:query].include?('IntrospectionQuery') || params[:query].include?('Login')
 
     render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
   end

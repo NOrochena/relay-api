@@ -5,11 +5,20 @@ module Mutations
     argument :username, String, required: true
     argument :password, String, required: true
 
-    type Types::UserType
+    type Types::ResponseType
 
     def resolve(username: nil, password: nil)
       user = User.create(username: username, password: password)
-      user if user.valid?
+      if user.valid?
+
+        token = JWT.encode({ user_id: user.id }, Rails.application.credentials.jwt[:secret])
+        {
+          success: true,
+          body: token
+        }
+      else
+        { error: 'Invalid' }
+      end
     end
   end
 end

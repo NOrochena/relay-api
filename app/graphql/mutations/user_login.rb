@@ -5,19 +5,19 @@ module Mutations
     argument :username, String, required: true
     argument :password, String, required: true
 
-    type Types::ResponseType3
+    type Types::ResponseType
 
     def resolve(username: nil, password: nil)
       user = User.find_by(username: username)
       if user&.authenticate(password)
-        token = encode_token(user_id: user.id)
+        token = JWT.encode({ user_id: user.id }, Rails.application.credentials.jwt[:secret])
         {
           success: true,
           body: token
         }
       else
-        { error: 'Invalid OTP' }
+        { error: 'Invalid' }
       end
     end
   end
-  end
+end
