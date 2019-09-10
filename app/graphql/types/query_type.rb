@@ -18,5 +18,10 @@ module Types
     def chat(id: nil)
       Chat.find(id)
     end
+
+    field :current_user, UserType, null: true
+    def current_user
+      context[:current_user]
+    end
   end
 end

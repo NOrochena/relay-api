@@ -11,4 +11,4 @@ module Mutations
       Message.create(chat_id: chat_id, content: content, user_id: context[:current_user].id)
     end
   end
-  end
+end

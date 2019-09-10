@@ -5,5 +5,6 @@ module Types
     field :create_user, mutation: Mutations::CreateUser
     field :user_login, mutation: Mutations::UserLogin
     field :create_message, mutation: Mutations::CreateMessage
+    field :create_chat, mutation: Mutations::CreateChat
   end
 end
