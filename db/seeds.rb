@@ -12,9 +12,9 @@ user1 = User.create(username: 'nick', password: 'password')
 user2 = User.create(username: 'shu', password: 'password')
 user3 = User.create(username: 'marcus', password: 'password')
 
-chat1 = Chat.create(user: user1)
-chat2 = Chat.create(user: user2)
-chat3 = Chat.create(user: user3)
+chat1 = Chat.create(user: user1, name: 'Nick seems like a cool guy')
+chat2 = Chat.create(user: user2, name: 'How do I program?')
+chat3 = Chat.create(user: user3, name: 'Pizza #1?')
 
 Message.create(user: user1, chat: chat1, content: 'Hype')
 Message.create(user: user2, chat: chat1, content: 'Hypeee')
