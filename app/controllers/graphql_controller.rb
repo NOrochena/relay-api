@@ -11,7 +11,7 @@ class GraphqlController < ApplicationController
       # current_user: current_user,
       current_user: @user
     }
-    result = RelayApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = GraphqlApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?

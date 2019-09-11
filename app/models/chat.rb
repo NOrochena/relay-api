@@ -8,6 +8,6 @@ class Chat < ApplicationRecord
   private
 
   def notify_subscriber_of_addition
-    RelayApiSchema.subscriptions.trigger('newChat', {}, self)
+    GraphqlApiSchema.subscriptions.trigger('newChat', {}, self)
   end
 end

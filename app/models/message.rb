@@ -8,6 +8,6 @@ class Message < ApplicationRecord
   private
 
   def notify_subscriber_of_addition
-    RelayApiSchema.subscriptions.trigger('newMessage', { 'chat' => chat_id.to_s }, self)
+    GraphqlApiSchema.subscriptions.trigger('newMessage', { 'chat' => chat_id.to_s }, self)
   end
 end

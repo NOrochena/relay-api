@@ -15,7 +15,7 @@ class GraphqlChannel < ApplicationCable::Channel
       channel: self
     }
 
-    result = RelayApiSchema.execute(
+    result = GraphqlApiSchema.execute(
       query: query,
       context: context,
       variables: variables,
@@ -38,7 +38,7 @@ class GraphqlChannel < ApplicationCable::Channel
 
   def unsubscribed
     @subscription_ids.each do |sid|
-      RelayApiSchema.subscriptions.delete_subscription(sid)
+      GraphqlApiSchema.subscriptions.delete_subscription(sid)
     end
   end
 
